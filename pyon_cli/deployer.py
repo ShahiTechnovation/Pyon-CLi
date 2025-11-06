@@ -1,4 +1,4 @@
-"""Smart contract deployment to Avalanche C-Chain."""
+"""Smart contract deployment to Polygon."""
 
 import json
 import time
@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Dict, List, Any, Optional
 
 from web3 import Web3
-# Web3 middleware no longer needed for Avalanche C-Chain
+# Web3 middleware no longer needed for Polygon
 from rich.console import Console
 
 from .compiler import get_contract_artifacts
@@ -17,7 +17,7 @@ console = Console()
 
 def get_web3_connection(config: Dict[str, Any]) -> Web3:
     """
-    Create Web3 connection to Avalanche RPC.
+    Create Web3 connection to Polygon RPC.
     
     Args:
         config: Configuration dictionary with RPC URL and chain ID
@@ -27,7 +27,7 @@ def get_web3_connection(config: Dict[str, Any]) -> Web3:
     """
     w3 = Web3(Web3.HTTPProvider(config["rpc_url"]))
     
-    # Avalanche C-Chain is EVM compatible, no special middleware needed
+    # Polygon is EVM compatible, no special middleware needed
     
     if not w3.is_connected():
         raise ConnectionError(f"Failed to connect to RPC: {config['rpc_url']}")
@@ -108,7 +108,7 @@ def deploy_contract(
     password: str = None
 ) -> Optional[Dict[str, Any]]:
     """
-    Deploy a smart contract to Avalanche.
+    Deploy a smart contract to Polygon.
     
     Args:
         contract_name: Name of the contract to deploy
@@ -137,7 +137,7 @@ def deploy_contract(
         # Check balance
         balance = w3.eth.get_balance(account.address)
         balance_eth = w3.from_wei(balance, 'ether')
-        console.print(f"[blue]Account balance: {balance_eth:.6f} AVAX[/blue]")
+        console.print(f"[blue]Account balance: {balance_eth:.6f} MATIC[/blue]")
         
         if balance == 0:
             console.print("[yellow]Warning:[/yellow] Account has zero balance. Deployment may fail.")
@@ -175,12 +175,12 @@ def deploy_contract(
         # Calculate deployment cost
         deployment_cost = gas_limit * gas_price
         deployment_cost_eth = w3.from_wei(deployment_cost, 'ether')
-        console.print(f"[blue]Estimated deployment cost: {deployment_cost_eth:.6f} AVAX[/blue]")
+        console.print(f"[blue]Estimated deployment cost: {deployment_cost_eth:.6f} MATIC[/blue]")
         
         if balance < deployment_cost:
             raise ValueError(
-                f"Insufficient balance. Need {deployment_cost_eth:.6f} AVAX, "
-                f"but only have {balance_eth:.6f} AVAX"
+                f"Insufficient balance. Need {deployment_cost_eth:.6f} MATIC, "
+                f"but only have {balance_eth:.6f} MATIC"
             )
         
         # Sign and send transaction

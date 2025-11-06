@@ -3,7 +3,7 @@ MintableToken - ERC-20 style token with admin-controlled minting
 Written in Python for AVAX CLI
 """
 
-from avax_cli.py_contracts import PySmartContract
+from pyon_cli.py_contracts import PySmartContract
 
 class MintableToken(PySmartContract):
     """ERC-20 style mintable token contract."""

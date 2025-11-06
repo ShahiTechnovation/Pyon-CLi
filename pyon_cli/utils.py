@@ -12,11 +12,11 @@ from rich.panel import Panel
 console = Console()
 
 
-def load_config(config_path: str = "avax_config.json") -> Dict[str, Any]:
+def load_config(config_path: str = "pyon_config.json") -> Dict[str, Any]:
     """Load configuration from file."""
     config_file = Path(config_path)
     if not config_file.exists():
-        console.print(f"[red]Error:[/red] {config_path} not found. Run 'python -m avax_cli.cli init' first.")
+        console.print(f"[red]Error:[/red] {config_path} not found. Run 'python -m pyon_cli.cli init' first.")
         return {}
     
     with open(config_file) as f:
@@ -32,8 +32,8 @@ def check_environment() -> bool:
         issues.append("PRIVATE_KEY environment variable not set")
     
     # Check config file
-    if not Path("avax_config.json").exists():
-        issues.append("avax_config.json not found")
+    if not Path("pyon_config.json").exists():
+        issues.append("pyon_config.json not found")
     
     # Check contracts directory
     if not Path("contracts").exists():
@@ -79,7 +79,7 @@ def format_address(address: str) -> str:
     return address
 
 
-def format_amount(amount: int, decimals: int = 18, symbol: str = "AVAX") -> str:
+def format_amount(amount: int, decimals: int = 18, symbol: str = "MATIC") -> str:
     """Format token amount for display."""
     formatted = amount / (10 ** decimals)
     return f"{formatted:,.4f} {symbol}"
@@ -88,10 +88,10 @@ def format_amount(amount: int, decimals: int = 18, symbol: str = "AVAX") -> str:
 def create_shortcut_commands():
     """Create shortcut batch files for common commands."""
     shortcuts = {
-        "compile.bat": "python -m avax_cli.cli compile",
-        "deploy.bat": "python -m avax_cli.cli deploy %1",
-        "info.bat": "python -m avax_cli.cli info %1",
-        "interact.bat": "python -m avax_cli.cli interact %*"
+        "compile.bat": "python -m pyon_cli.cli compile",
+        "deploy.bat": "python -m pyon_cli.cli deploy %1",
+        "info.bat": "python -m pyon_cli.cli info %1",
+        "interact.bat": "python -m pyon_cli.cli interact %*"
     }
     
     for filename, command in shortcuts.items():
@@ -119,20 +119,20 @@ def validate_contract_name(name: str) -> bool:
 def get_network_info(network: str) -> Dict[str, Any]:
     """Get network configuration."""
     networks = {
-        "fuji": {
-            "name": "Avalanche Fuji Testnet",
-            "rpc_url": "https://api.avax-test.network/ext/bc/C/rpc",
-            "chain_id": 43113,
-            "explorer": "https://testnet.snowtrace.io",
-            "faucet": "https://faucet.avax.network"
+        "amoy": {
+            "name": "Polygon Amoy Testnet",
+            "rpc_url": "https://rpc-amoy.polygon.technology",
+            "chain_id": 80002,
+            "explorer": "https://amoy.polygonscan.com",
+            "faucet": "https://faucet.polygon.technology"
         },
         "mainnet": {
-            "name": "Avalanche Mainnet",
-            "rpc_url": "https://api.avax.network/ext/bc/C/rpc",
-            "chain_id": 43114,
-            "explorer": "https://snowtrace.io",
+            "name": "Polygon Mainnet",
+            "rpc_url": "https://polygon-rpc.com",
+            "chain_id": 137,
+            "explorer": "https://polygonscan.com",
             "faucet": None
         }
     }
     
-    return networks.get(network, networks["fuji"])
+    return networks.get(network, networks["amoy"])

@@ -5,8 +5,8 @@ import json
 import os
 from pathlib import Path
 
-from avax_cli.deployer import deploy_contract
-from avax_cli.wallet import WalletManager
+from pyon_cli.deployer import deploy_contract
+from pyon_cli.wallet import WalletManager
 
 
 def main():

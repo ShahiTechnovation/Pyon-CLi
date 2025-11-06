@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""Setup script for PyVax CLI tool."""
+"""Setup script for Pyon CLI tool."""
 
 from setuptools import setup, find_packages
 
 setup(
-    name="avax-cli",
+    name="pyon-cli",
     version="1.0.0",
-    description="Python CLI tool for deploying smart contracts to Avalanche C-Chain",
-    author="PyVax Team",
-    author_email="team@pyvax.dev",
-    url="https://github.com/pyvax/avax-cli",
+    description="Python CLI tool for deploying smart contracts to Polygon",
+    author="Pyon Team",
+    author_email="team@pyon.dev",
+    url="https://github.com/ShahiTechnovation/Pyon-CLi",
     packages=find_packages(),
     install_requires=[
         "typer>=0.9.0",
@@ -22,7 +22,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "avax-cli=avax_cli.cli:main",
+            "pyon-cli=pyon_cli.cli:main",
         ],
     },
     python_requires=">=3.8",
