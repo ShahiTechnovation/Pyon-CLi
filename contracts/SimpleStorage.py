@@ -1,4 +1,4 @@
-from pyon_cli.py_contracts import PySmartContract
+from avax_cli.py_contracts import PySmartContract
 
 class SimpleStorage(PySmartContract):
     """Simple storage contract written in Python."""

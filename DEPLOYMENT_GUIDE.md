@@ -1,12 +1,12 @@
-# 🚀 Pyon CLI StakeToken Deployment & Interaction Guide
+# 🚀 PyVax StakeToken Deployment & Interaction Guide
 
 ## 📋 Overview
-This guide demonstrates the complete deployment and interaction workflow for the StakeToken smart contract using Pyon CLI.
+This guide demonstrates the complete deployment and interaction workflow for the StakeToken smart contract using PyVax CLI.
 
 ## ✅ What We've Accomplished
 
 ### 🏗️ **Contract Development**
-- ✅ **Python Version**: Created `StakeToken.py` with Pyon CLI decorators
+- ✅ **Python Version**: Created `StakeToken.py` with PyVax decorators
 - ✅ **Solidity Version**: Created `StakeToken.sol` with full ERC-20 + staking functionality
 - ✅ **Compilation**: Both versions compile successfully
 - ✅ **Deployment**: Solidity version deployed to Avalanche Fuji testnet
@@ -178,4 +178,4 @@ Your StakeToken contract is now fully deployed and functional on Avalanche Fuji 
 - ✅ Python examples for integration
 - ✅ Comprehensive testing and validation
 
-The Pyon CLI tool now provides a complete solution for deploying and interacting with both Python and Solidity smart contracts on Avalanche!
+The PyVax CLI tool now provides a complete solution for deploying and interacting with both Python and Solidity smart contracts on Avalanche!

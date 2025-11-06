@@ -3,7 +3,7 @@ BeginnerToken - A simple Python smart contract for beginners
 No Solidity knowledge required! Just Python.
 """
 
-from pyon_cli.py_contracts import PySmartContract
+from avax_cli.py_contracts import PySmartContract
 
 class BeginnerToken(PySmartContract):
     """A simple token contract written in pure Python."""

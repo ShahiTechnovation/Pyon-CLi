@@ -9,7 +9,7 @@ ERC-20 style token in Python with:
 - Dynamic reward rate adjustment
 """
 
-from pyon_cli.py_contracts import PySmartContract
+from avax_cli.py_contracts import PySmartContract
 
 class StakeToken(PySmartContract):
     def __init__(self):

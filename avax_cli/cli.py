@@ -17,8 +17,8 @@ from .wallet import WalletManager
 from .interactor import interact_with_contract, show_contract_info
 
 app = typer.Typer(
-    name="pyon-cli",
-    help="Production-ready CLI tool for deploying Solidity smart contracts to Polygon",
+    name="avax-cli",
+    help="Production-ready CLI tool for deploying Solidity smart contracts to Avalanche C-Chain",
     rich_markup_mode="rich",
 )
 
@@ -30,7 +30,7 @@ def init(
     project_name: str = typer.Argument(..., help="Name of the project to initialize"),
     force: bool = typer.Option(False, "--force", "-f", help="Overwrite existing project"),
 ) -> None:
-    """Initialize a new Polygon project with sample contracts and configuration."""
+    """Initialize a new Avalanche project with sample contracts and configuration."""
     project_path = Path(project_name)
     
     if project_path.exists() and not force:
@@ -45,17 +45,17 @@ def init(
     
     # Create default config
     config = {
-        "network": "amoy",
-        "rpc_url": "https://rpc-amoy.polygon.technology",
-        "chain_id": 80002,
+        "network": "fuji",
+        "rpc_url": "https://api.avax-test.network/ext/bc/C/rpc",
+        "chain_id": 43113,
         "explorer_api_key": ""
     }
     
-    with open(project_path / "pyon_config.json", "w") as f:
+    with open(project_path / "avax_config.json", "w") as f:
         json.dump(config, f, indent=2)
     
     # Create sample Python smart contract
-    python_contract = '''from pyon_cli.py_contracts import PySmartContract
+    python_contract = '''from avax_cli.py_contracts import PySmartContract
 
 class SimpleStorage(PySmartContract):
     """Simple storage contract written in Python."""
@@ -113,14 +113,14 @@ import json
 import os
 from pathlib import Path
 
-from pyon_cli.deployer import deploy_contract
-from pyon_cli.wallet import WalletManager
+from avax_cli.deployer import deploy_contract
+from avax_cli.wallet import WalletManager
 
 
 def main():
-    """Deploy SimpleStorage contract to Polygon."""
+    """Deploy SimpleStorage contract to Avalanche."""
     # Load configuration
-    with open("pyon_config.json") as f:
+    with open("avax_config.json") as f:
         config = json.load(f)
     
     # Initialize wallet
@@ -157,10 +157,10 @@ if __name__ == "__main__":
         f"[green]✓[/green] Project '{project_name}' initialized successfully!\n\n"
         f"[yellow]Next steps:[/yellow]\n"
         f"1. cd {project_name}\n"
-        f"2. pyon-cli wallet new  # Create a new wallet\n"
-        f"3. pyon-cli compile     # Compile contracts (Python + Solidity)\n"
-        f"4. pyon-cli deploy SimpleStorage  # Deploy Python contract to Amoy testnet\n"
-        f"5. pyon-cli deploy SimpleStorageSol  # Deploy Solidity contract",
+        f"2. avax-cli wallet new  # Create a new wallet\n"
+        f"3. avax-cli compile     # Compile contracts (Python + Solidity)\n"
+        f"4. avax-cli deploy SimpleStorage  # Deploy Python contract to Fuji testnet\n"
+        f"5. avax-cli deploy SimpleStorageSol  # Deploy Solidity contract",
         title="Project Initialized",
         border_style="green"
     ))
@@ -209,16 +209,16 @@ def compile(
 def deploy(
     contract_name: str = typer.Argument(..., help="Name of the contract to deploy"),
     constructor_args: Optional[str] = typer.Option(None, "--args", help="Constructor arguments as JSON array"),
-    config_file: str = typer.Option("pyon_config.json", "--config", help="Configuration file path"),
+    config_file: str = typer.Option("avax_config.json", "--config", help="Configuration file path"),
     dry_run: bool = typer.Option(False, "--dry-run", help="Estimate gas without deploying"),
     network: Optional[str] = typer.Option(None, "--network", help="Override network from config"),
 ) -> None:
-    """Deploy a compiled contract to Polygon."""
+    """Deploy a compiled contract to Avalanche."""
     config_path = Path(config_file)
     
     if not config_path.exists():
         console.print(f"[red]Error:[/red] Config file '{config_file}' not found.")
-        console.print("Run 'pyon-cli init <project_name>' to create a project with default config.")
+        console.print("Run 'avax-cli init <project_name>' to create a project with default config.")
         raise typer.Exit(1)
     
     # Load configuration
@@ -230,14 +230,14 @@ def deploy(
         if network == "mainnet":
             config.update({
                 "network": "mainnet",
-                "rpc_url": "https://polygon-rpc.com",
-                "chain_id": 137
+                "rpc_url": "https://api.avax.network/ext/bc/C/rpc",
+                "chain_id": 43114
             })
-        elif network == "amoy":
+        elif network == "fuji":
             config.update({
-                "network": "amoy", 
-                "rpc_url": "https://rpc-amoy.polygon.technology",
-                "chain_id": 80002
+                "network": "fuji", 
+                "rpc_url": "https://api.avax-test.network/ext/bc/C/rpc",
+                "chain_id": 43113
             })
     
     # Parse constructor arguments
@@ -298,7 +298,7 @@ app.add_typer(wallet_app, name="wallet")
 @wallet_app.command()
 def new(
     password: Optional[str] = typer.Option(None, "--password", help="Wallet password (will prompt if not provided)"),
-    keystore_file: str = typer.Option("pyon_key.json", "--keystore", help="Keystore file path"),
+    keystore_file: str = typer.Option("avax_key.json", "--keystore", help="Keystore file path"),
 ) -> None:
     """Generate a new wallet and save encrypted keystore."""
     if password is None:
@@ -320,7 +320,7 @@ def new(
             f"[yellow]⚠️  Important:[/yellow]\n"
             f"• Keep your password safe - it cannot be recovered\n"
             f"• Back up your keystore file\n"
-            f"• Fund your wallet with MATIC before deploying contracts",
+            f"• Fund your wallet with AVAX before deploying contracts",
             title="Wallet Created",
             border_style="green"
         ))
@@ -332,7 +332,7 @@ def new(
 
 @wallet_app.command()
 def show(
-    keystore_file: str = typer.Option("pyon_key.json", "--keystore", help="Keystore file path"),
+    keystore_file: str = typer.Option("avax_key.json", "--keystore", help="Keystore file path"),
 ) -> None:
     """Show wallet address and balance information."""
     try:
@@ -345,7 +345,7 @@ def show(
         else:
             if not Path(keystore_file).exists():
                 console.print(f"[red]Error:[/red] Keystore file '{keystore_file}' not found.")
-                console.print("Run 'pyon-cli wallet new' to create a new wallet.")
+                console.print("Run 'avax-cli wallet new' to create a new wallet.")
                 raise typer.Exit(1)
             
             password = typer.prompt(f"Enter password for {keystore_file}", hide_input=True)
@@ -357,7 +357,7 @@ def show(
             f"Address: {address}\n"
             f"Source: {source}\n\n"
             f"[yellow]Note:[/yellow] Balance checking requires RPC connection.\n"
-            f"Use 'pyon-cli deploy --dry-run' to test connectivity.",
+            f"Use 'avax-cli deploy --dry-run' to test connectivity.",
             title="Wallet Details",
             border_style="cyan"
         ))
@@ -377,9 +377,9 @@ def interact(
     """Interact with deployed smart contracts."""
     try:
         # Load configuration
-        config_file = Path("pyon_config.json")
+        config_file = Path("avax_config.json")
         if not config_file.exists():
-            console.print("[red]Error:[/red] pyon_config.json not found. Run 'pyon-cli init' first.")
+            console.print("[red]Error:[/red] avax_config.json not found. Run 'avax-cli init' first.")
             raise typer.Exit(1)
         
         with open(config_file) as f:
@@ -431,9 +431,9 @@ def info(
     """Show information about a deployed contract."""
     try:
         # Load configuration
-        config_file = Path("pyon_config.json")
+        config_file = Path("avax_config.json")
         if not config_file.exists():
-            console.print("[red]Error:[/red] pyon_config.json not found. Run 'pyon-cli init' first.")
+            console.print("[red]Error:[/red] avax_config.json not found. Run 'avax-cli init' first.")
             raise typer.Exit(1)
         
         with open(config_file) as f:

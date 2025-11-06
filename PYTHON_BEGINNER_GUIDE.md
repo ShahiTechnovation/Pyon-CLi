@@ -66,7 +66,7 @@ python -m avax_cli.cli deploy MyToken
 
 ## 📚 **Python vs Solidity Comparison**
 
-| Feature | Python (Pyon CLI) | Solidity |
+| Feature | Python (PyVax) | Solidity |
 |---------|---------------|----------|
 | **Learning Curve** | ✅ Easy (if you know Python) | ❌ Hard (new language) |
 | **Syntax** | ✅ Familiar Python syntax | ❌ C-like syntax |
@@ -105,7 +105,7 @@ class GameContract(PySmartContract):
     # Digital collectibles
 ```
 
-## 🔧 **Pyon CLI Decorators (Your Tools)**
+## 🔧 **PyVax Decorators (Your Tools)**
 
 ### `@view_function`
 - **Purpose**: Read data from blockchain
@@ -186,7 +186,7 @@ class BeginnerToken(PySmartContract):
 ## 🚀 **Getting Started Checklist**
 
 - ✅ **Know Python?** You're ready!
-- ✅ **Install Pyon CLI** (already done)
+- ✅ **Install PyVax** (already done)
 - ✅ **Write contract** in Python
 - ✅ **Compile** with one command
 - ✅ **Deploy** to blockchain
@@ -203,8 +203,8 @@ class BeginnerToken(PySmartContract):
 
 ## 🌟 **Success Story**
 
-**Before Pyon CLI**: "I need to learn Solidity, Remix, Hardhat, gas optimization..."
-**With Pyon CLI**: "I'll write a Python class and deploy it!"
+**Before PyVax**: "I need to learn Solidity, Remix, Hardhat, gas optimization..."
+**With PyVax**: "I'll write a Python class and deploy it!"
 
 ```python
 # 30 minutes later...
@@ -225,4 +225,4 @@ class MyAwesomeContract(PySmartContract):
 - ✅ Use familiar Python syntax and concepts
 - ✅ Build real blockchain applications
 
-**Pyon CLI makes blockchain development accessible to every Python developer!** 🐍⛓️
+**PyVax makes blockchain development accessible to every Python developer!** 🐍⛓️

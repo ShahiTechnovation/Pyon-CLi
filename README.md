@@ -1,15 +1,15 @@
-# Pyon CLI - Polygon Smart Contract CLI
+# PyVax - Avalanche Smart Contract CLI
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**Pyon CLI** is a production-ready CLI tool for deploying Solidity and Python smart contracts to Polygon. It features a unique **Python-to-EVM transpiler** that allows you to write smart contracts in Python and deploy them directly to the blockchain.
+**PyVax** is a production-ready CLI tool for deploying Solidity and Python smart contracts to Avalanche C-Chain. It features a unique **Python-to-EVM transpiler** that allows you to write smart contracts in Python and deploy them directly to the blockchain.
 
 ## 🚀 Features
 
 - **Python Smart Contracts**: Write smart contracts in Python and transpile them to EVM bytecode
 - **Solidity Support**: Full support for Solidity contract compilation and deployment
-- **Multi-Network**: Deploy to Polygon Amoy testnet or mainnet
+- **Multi-Network**: Deploy to Avalanche Fuji testnet or mainnet
 - **Secure Wallet Management**: Encrypted keystore with PBKDF2 encryption
 - **Gas Estimation**: Accurate gas estimation before deployment
 - **Rich CLI Interface**: Beautiful command-line interface with progress indicators
@@ -41,8 +41,8 @@ pip install -e ".[dev]"
 ### 1. Initialize a New Project
 
 ```bash
-python -m pyon_cli.cli init my-project
-cd my-project
+python -m avax_cli.cli init my_project
+cd my_project
 ```
 
 This creates a new project with:
@@ -53,20 +53,20 @@ This creates a new project with:
 ### 2. Create a Wallet
 
 ```bash
-pyon-cli wallet new
+python -m avax_cli.cli wallet new
 ```
 
 This will:
 - Generate a new encrypted wallet
-- Save it as `pyon_key.json`
+- Save it as `avax_key.json`
 - Display your wallet address
 
-**⚠️ Important**: Fund your wallet with MATIC before deploying contracts!
+**⚠️ Important**: Fund your wallet with AVAX before deploying contracts!
 
 ### 3. Compile Contracts
 
 ```bash
-pyon-cli compile
+python -m avax_cli.cli compile
 ```
 
 This compiles both Python and Solidity contracts in the `contracts/` directory.
@@ -74,25 +74,25 @@ This compiles both Python and Solidity contracts in the `contracts/` directory.
 ### 4. Deploy Contracts
 
 ```bash
-# Deploy to Amoy testnet (default)
-pyon-cli deploy SimpleStorage
+# Deploy to Fuji testnet (default)
+python -m avax_cli.cli deploy SimpleStorage
 
 # Deploy to mainnet
-pyon-cli deploy SimpleStorage --network mainnet
+python -m avax_cli.cli deploy SimpleStorage --network mainnet
 
 # Deploy with constructor arguments
-pyon-cli deploy SimpleStorage --args '[42]'
+python -m avax_cli.cli deploy SimpleStorage --args '[42]'
 
 # Dry run (estimate gas only)
-pyon-cli deploy SimpleStorage --dry-run
+python -m avax_cli.cli deploy SimpleStorage --dry-run
 ```
 
 ## 🐍 Python Smart Contracts
 
-Pyon CLI allows you to write smart contracts in Python using a special syntax:
+PyVax allows you to write smart contracts in Python using a special syntax:
 
 ```python
-from pyon_cli.py_contracts import PySmartContract
+from avax_cli.py_contracts import PySmartContract
 
 class SimpleStorage(PySmartContract):
     """Simple storage contract in Python."""
@@ -126,45 +126,45 @@ class SimpleStorage(PySmartContract):
 ### Project Management
 
 ```bash
-# Initialize project
-pyon-cli init <project_name> [--force]
+# Initialize new project
+avax-cli init <project_name> [--force]
 
-# Compile all contracts
-pyon-cli compile [--contracts DIR] [--output DIR]
+# Compile contracts
+avax-cli compile [--contracts contracts/] [--output build/]
 ```
 
 ### Wallet Management
 
 ```bash
 # Create new wallet
-pyon-cli wallet new [--keystore FILE] [--password PASSWORD]
+avax-cli wallet new [--password PASSWORD] [--keystore avax_key.json]
 
 # Show wallet info
-pyon-cli wallet show [--keystore FILE]
+avax-cli wallet show [--keystore avax_key.json]
 ```
 
 ### Contract Deployment
 
 ```bash
 # Deploy contract
-pyon-cli deploy <contract_name> [OPTIONS]
+avax-cli deploy <contract_name> [OPTIONS]
 
 # Options:
 #   --args TEXT          Constructor arguments as JSON array
 #   --config TEXT        Configuration file path
 #   --dry-run           Estimate gas without deploying
-#   --network TEXT      Override network (amoy/mainnet)
+#   --network TEXT      Override network (fuji/mainnet)
 ```
 
 ## ⚙️ Configuration
 
-### Network Configuration (`pyon_config.json`)
+### Network Configuration (`avax_config.json`)
 
 ```json
 {
-  "network": "amoy",
-  "rpc_url": "https://rpc-amoy.polygon.technology",
-  "chain_id": 80002,
+  "network": "fuji",
+  "rpc_url": "https://api.avax-test.network/ext/bc/C/rpc",
+  "chain_id": 43113,
   "explorer_api_key": ""
 }
 ```
@@ -173,8 +173,8 @@ pyon-cli deploy <contract_name> [OPTIONS]
 
 | Network | Chain ID | RPC URL |
 |---------|----------|---------|
-| Amoy (Testnet) | 80002 | https://rpc-amoy.polygon.technology |
-| Mainnet | 137 | https://polygon-rpc.com |
+| Fuji (Testnet) | 43113 | https://api.avax-test.network/ext/bc/C/rpc |
+| Mainnet | 43114 | https://api.avax.network/ext/bc/C/rpc |
 
 ## 🔐 Security
 
@@ -189,7 +189,7 @@ pyon-cli deploy <contract_name> [OPTIONS]
 1. **Never commit private keys** to version control
 2. **Use strong passwords** for wallet encryption
 3. **Backup your keystore files** securely
-4. **Test on Amoy testnet** before mainnet deployment
+4. **Test on Fuji testnet** before mainnet deployment
 
 ## 📁 Project Structure
 
@@ -200,8 +200,8 @@ my-project/
 │   └── SimpleStorage.sol
 ├── build/              # Compiled contract artifacts
 ├── scripts/            # Deployment scripts
-├── pyon_config.json    # Network configuration
-├── pyon_key.json      # Encrypted wallet (created by CLI)
+│   └── deploy.py
+├── avax_config.json    # Network configuration
 └── deployments.json   # Deployment history
 ```
 
@@ -216,14 +216,14 @@ pytest
 ### Code Formatting
 
 ```bash
-black pyon_cli/
-isort pyon_cli/
+black avax_cli/
+isort avax_cli/
 ```
 
 ### Type Checking
 
 ```bash
-mypy pyon_cli/
+mypy avax_cli/
 ```
 
 ## 📖 Examples
@@ -250,12 +250,12 @@ class Counter(PySmartContract):
 
 ```python
 #!/usr/bin/env python3
-from pyon_cli.deployer import deploy_contract
-from pyon_cli.wallet import WalletManager
+from avax_cli.deployer import deploy_contract
+from avax_cli.wallet import WalletManager
 import json
 
 # Load configuration
-with open("pyon_config.json") as f:
+with open("avax_config.json") as f:
     config = json.load(f)
 
 # Deploy contract
@@ -285,16 +285,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🆘 Support
 
-- **Issues**: [GitHub Issues](https://github.com/ShahiTechnovation/pyvax-cli/issues)
-- **Documentation**: [GitHub README](https://github.com/ShahiTechnovation/pyvax-cli#readme)
-- **Polygon Docs**: [Official Documentation](https://docs.polygon.technology/)
+- **Issues**: [GitHub Issues](https://github.com/pyvax/avax-cli/issues)
+- **Documentation**: [GitHub README](https://github.com/pyvax/avax-cli#readme)
+- **Avalanche Docs**: [Official Documentation](https://docs.avax.network/)
 
 ## 🔗 Links
 
-- [Polygon Network](https://polygon.technology/)
-- [Polygon Explorer](https://polygonscan.com/)
-- [Amoy Testnet Faucet](https://faucet.polygon.technology/)
+- [Avalanche Network](https://www.avax.network/)
+- [Avalanche C-Chain Explorer](https://snowtrace.io/)
+- [Fuji Testnet Faucet](https://faucet.avax.network/)
 
 ---
 
-**⚡ Happy Building on Polygon! ⚡**
+**⚡ Happy Building on Avalanche! ⚡**

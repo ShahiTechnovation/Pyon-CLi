@@ -1,4 +1,4 @@
-"""Create shortcut commands for easier Pyon CLI usage."""
+"""Create shortcut commands for easier PyVax usage."""
 
 import os
 from pathlib import Path
@@ -8,13 +8,13 @@ console = Console()
 
 
 def create_shortcuts():
-    """Create batch file shortcuts for common Pyon CLI commands."""
+    """Create batch file shortcuts for common PyVax commands."""
     
     shortcuts = {
-        "pyon.bat": "python -m pyon_cli.cli %*",
-        "compile.bat": "python -m pyon_cli.cli compile",
-        "deploy.bat": "python -m pyon_cli.cli deploy %1",
-        "info.bat": "python -m pyon_cli.cli info %1"
+        "avax.bat": "python -m avax_cli.cli %*",
+        "compile.bat": "python -m avax_cli.cli compile",
+        "deploy.bat": "python -m avax_cli.cli deploy %1",
+        "info.bat": "python -m avax_cli.cli info %1"
     }
     
     created_files = []
@@ -33,7 +33,7 @@ def create_shortcuts():
             console.print(f"  📄 {filename}")
         
         console.print("\n[cyan]Usage examples:[/cyan]")
-        console.print("  .\\pyon.bat compile")
+        console.print("  .\\avax.bat compile")
         console.print("  .\\deploy.bat MyContract")
         console.print("  .\\info.bat StakeToken")
     
@@ -43,7 +43,7 @@ def create_shortcuts():
 def setup_environment():
     """Set up development environment with shortcuts and checks."""
     
-    console.print("[blue]Setting up Pyon CLI development environment...[/blue]")
+    console.print("[blue]Setting up PyVax development environment...[/blue]")
     
     # Create shortcuts
     shortcuts = create_shortcuts()
@@ -52,10 +52,10 @@ def setup_environment():
     checks = []
     
     # Check if in project directory
-    if Path("pyon_config.json").exists():
+    if Path("avax_config.json").exists():
         checks.append("✅ Project configuration found")
     else:
-        checks.append("⚠️ Not in Pyon CLI project directory")
+        checks.append("⚠️ Not in PyVax project directory")
     
     # Check contracts directory
     if Path("contracts").exists():

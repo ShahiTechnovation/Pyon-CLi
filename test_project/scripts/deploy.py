@@ -5,14 +5,14 @@ import json
 import os
 from pathlib import Path
 
-from pyon_cli.deployer import deploy_contract
-from pyon_cli.wallet import WalletManager
+from avax_cli.deployer import deploy_contract
+from avax_cli.wallet import WalletManager
 
 
 def main():
-    """Deploy SimpleStorage contract to Polygon."""
+    """Deploy SimpleStorage contract to Avalanche."""
     # Load configuration
-    with open("pyon_config.json") as f:
+    with open("avax_config.json") as f:
         config = json.load(f)
     
     # Initialize wallet

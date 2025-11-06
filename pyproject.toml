@@ -3,16 +3,16 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pyon-cli"
+name = "avax-cli"
 version = "0.1.0"
-description = "Production-ready CLI tool for deploying Solidity and Python smart contracts to Polygon"
+description = "Production-ready CLI tool for deploying Solidity and Python smart contracts to Avalanche C-Chain"
 authors = [
-    {name = "Pyon CLI Developer", email = "dev@pyoncli.com"}
+    {name = "PyVax Developer", email = "dev@pyvax.com"}
 ]
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.8"
-keywords = ["polygon", "blockchain", "smart-contracts", "cli", "python", "solidity", "evm", "matic"]
+keywords = ["avalanche", "blockchain", "smart-contracts", "cli", "python", "solidity", "evm"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -50,20 +50,20 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/ShahiTechnovation/pyvax-cli"
-Documentation = "https://github.com/ShahiTechnovation/pyvax-cli#readme"
-Repository = "https://github.com/ShahiTechnovation/pyvax-cli.git"
-"Bug Tracker" = "https://github.com/ShahiTechnovation/pyvax-cli/issues"
+Homepage = "https://github.com/pyvax/avax-cli"
+Documentation = "https://github.com/pyvax/avax-cli#readme"
+Repository = "https://github.com/pyvax/avax-cli.git"
+"Bug Tracker" = "https://github.com/pyvax/avax-cli/issues"
 
 [project.scripts]
-pyon-cli = "pyon_cli.cli:app"
+avax-cli = "avax_cli.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["pyon_cli*"]
+include = ["avax_cli*"]
 
 [tool.setuptools.package-data]
-pyon_cli = ["*.json", "*.toml"]
+avax_cli = ["*.json", "*.toml"]
 
 [tool.black]
 line-length = 100
@@ -116,7 +116,7 @@ addopts = [
     "--strict-markers",
     "--strict-config",
     "--verbose",
-    "--cov=pyon_cli",
+    "--cov=avax_cli",
     "--cov-report=term-missing",
     "--cov-report=html",
     "--cov-report=xml",

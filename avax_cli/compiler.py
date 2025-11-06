@@ -254,7 +254,7 @@ def get_contract_artifacts(contract_name: str, build_dir: Path = Path("build")) 
     if not artifact_file.exists():
         raise FileNotFoundError(
             f"Contract artifacts not found for {contract_name}. "
-            f"Run 'pyon-cli compile' first."
+            f"Run 'avax-cli compile' first."
         )
     
     with open(artifact_file) as f:
