@@ -1,8 +1,8 @@
-# 🐍 PyVax - Python Smart Contracts for Avalanche
+# 🐍 Pyon CLI - Python Smart Contracts for Avalanche
 
 **Write smart contracts in Python. Deploy to Avalanche. No Solidity required.**
 
-PyVax is a revolutionary CLI tool that enables Python developers to create blockchain applications using familiar Python syntax. Deploy ERC-20 tokens, voting systems, and complex DeFi protocols directly to Avalanche C-Chain.
+Pyon CLI is a revolutionary CLI tool that enables Python developers to create blockchain applications using familiar Python syntax. Deploy ERC-20 tokens, voting systems, and complex DeFi protocols directly to Avalanche C-Chain.
 
 ## 🌟 **Key Features**
 
@@ -343,8 +343,8 @@ if balance < amount:
 
 ### **Environment Setup**
 ```bash
-# Clone or download PyVax
-cd pyvax
+# Clone or download Pyon CLI
+cd pyon-cli
 
 # Install dependencies (if needed)
 pip install -r requirements.txt
@@ -383,13 +383,13 @@ python -m avax_cli.cli init my_project
 
 ## 🔗 **Resources**
 
-- **PyVax Documentation**: This README
+- **Pyon CLI Documentation**: This README
 - **Avalanche Docs**: [docs.avax.network](https://docs.avax.network)
 - **Snowtrace Explorer**: [snowtrace.io](https://snowtrace.io)
 - **AVAX Faucet**: [faucet.avax.network](https://faucet.avax.network)
 
 ---
 
-**🐍 PyVax makes blockchain development accessible to every Python developer!**
+**🐍 Pyon CLI makes blockchain development accessible to every Python developer!**
 
 *Write Python. Deploy to Avalanche. Build the future.* ⛓️

@@ -15,14 +15,14 @@ import base64
 
 
 class WalletManager:
-    """Manage Avalanche wallets with encryption support."""
+    """Manage Polygon wallets with encryption support."""
     
     def __init__(self):
         """Initialize wallet manager."""
         # Enable unaudited HD wallet features for account generation
         Account.enable_unaudited_hdwallet_features()
     
-    def create_wallet(self, password: str, keystore_file: str = "avax_key.json") -> str:
+    def create_wallet(self, password: str, keystore_file: str = "pyon_key.json") -> str:
         """
         Create a new wallet and save encrypted keystore.
         
@@ -91,7 +91,7 @@ class WalletManager:
             return self._load_encrypted_key(keystore_file, password)
         
         # Try default keystore
-        default_keystore = "avax_key.json"
+        default_keystore = "pyon_key.json"
         if Path(default_keystore).exists() and password:
             return self._load_encrypted_key(default_keystore, password)
         

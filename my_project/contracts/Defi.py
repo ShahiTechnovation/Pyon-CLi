@@ -3,7 +3,7 @@ DeFiContract - Enhanced DeFi savings pool in Python
 Compatible with complex DeFi applications!
 """
 
-from avax_cli.py_contracts import PySmartContract
+from pyon_cli.py_contracts import PySmartContract
 
 class Defi(PySmartContract):
     """Enhanced DeFi savings pool with proper address handling and mapping support."""

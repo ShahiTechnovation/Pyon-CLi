@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deploy script for nea contracts."""
+"""Deploy script for test_polygon contracts."""
 
 import json
 import os

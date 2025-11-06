@@ -3,7 +3,7 @@ VotingContract - A simple voting system in Python
 Perfect for beginners - no Solidity needed!
 """
 
-from avax_cli.py_contracts import PySmartContract
+from pyon_cli.py_contracts import PySmartContract
 
 class VotingContract(PySmartContract):
     """A simple voting contract where people can vote for candidates."""

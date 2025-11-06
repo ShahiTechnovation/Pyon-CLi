@@ -29,7 +29,7 @@ class StakeTokenInteractor:
         self.abi = contract_data["abi"]
         
         # Connect to network
-        self.w3 = Web3(Web3.HTTPProvider("https://api.avax-test.network/ext/bc/C/rpc"))
+        self.w3 = Web3(Web3.HTTPProvider("https://rpc-amoy.polygon.technology"))
         
         # Setup account
         private_key = os.getenv('PRIVATE_KEY')
@@ -44,13 +44,13 @@ class StakeTokenInteractor:
     
     def get_balances(self):
         """Get current balances for the account."""
-        avax_balance = self.w3.eth.get_balance(self.account.address)
+        matic_balance = self.w3.eth.get_balance(self.account.address)
         token_balance = self.contract.functions.balanceOf(self.account.address).call()
         staked_balance = self.contract.functions.stakedBalance(self.account.address).call()
         reward_balance = self.contract.functions.getReward(self.account.address).call()
         
         return {
-            'avax': self.w3.from_wei(avax_balance, 'ether'),
+            'matic': self.w3.from_wei(matic_balance, 'ether'),
             'tokens': token_balance / 10**18,
             'staked': staked_balance / 10**18,
             'rewards': reward_balance / 10**18
@@ -160,7 +160,7 @@ def example_1_basic_operations():
     # Check initial balances
     print("\n📊 Initial Balances:")
     balances = interactor.get_balances()
-    print(f"   AVAX: {balances['avax']:.4f}")
+    print(f"   MATIC: {balances['matic']:.4f}")
     print(f"   STK Tokens: {balances['tokens']:,.2f}")
     print(f"   Staked: {balances['staked']:,.2f}")
     print(f"   Rewards: {balances['rewards']:,.6f}")
